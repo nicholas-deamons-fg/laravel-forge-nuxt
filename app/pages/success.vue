@@ -6,11 +6,27 @@
 </template>
 
 <script setup>
-const { loggedIn, user, session, fetch, clear, openInPopup } = useUserSession()
-console.log('User:', user);
-console.error('Session:', session);
-await setUserSession(event, userData);
+import { onMounted } from "vue";
 
+//const { loggedIn, user, session, fetch, clear, openInPopup } = useUserSession();
+
+
+
+//console.log('User:', user);
+// console.error('Session:', session);
+onMounted(() => {
+  // console.log('Component mounted. Logged In:', loggedIn.value, 'User:', user.value);
+  // lert(getCookie('nuxt-session'));
+  const params = new URLSearchParams(window.location.search);
+  window.opener.postMessage({
+    success: true,
+    code: params.get('code'),
+  });
+})
+
+/*
+// await setUserSession(event, userData);
+*/
 </script>
 
 

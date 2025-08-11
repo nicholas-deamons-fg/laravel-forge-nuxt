@@ -1,15 +1,24 @@
 <template>
      <div class="p-20 max-w-xxl mx-auto">
       <button class="btn btn-primary cursor-pointer" 
-         @click="openInPopup('https://oauth.battle.net/authorize?client_id=' + BNET_ID + '&redirect_uri=http://localhost:3000/success&response_type=code&region=us&state=ndcharactert')">Login with BNet</button>
+         @click="openInPopup('/auth/battlenet')">Login with BNet</button>
         <div class="grid grid-cols-6 lg:gap-20">
             <div class="col-span-1">
-               test {{ loggedIn ? 'Logged In' : 'Not Logged In' }}
+               test for login state {{ loggedIn ? 'Logged In' : 'Not Logged In' }}
 
             </div>
             <div class="lg:col-span-5 lg:border-l lg:border-gray-200 lg:pl-10 ">
-               <p class="text-md font-semibold">Welcome to the ND Character Tracker</p>
+               <p class="text-md font-semibold">
+                {{loggedIn ? `Yo, ${user.user.battletag}!` : 'Welcome to the ND Character Tracker'}}</p>
                <p class="">Here you can track your favorite characters and their details.</p>
+              
+              <div class="mt-10" v-if="loggedIn && user.user.battletag">
+
+                  <ULink :to="`/character?tag=${user.user.battletag}`">
+                    Go to Character Page
+                  </ULink>
+
+              </div>
                <div class="grid grid-cols-4 mt-5"
                >
                   <div class="bg-gray-700 p-5 border-1 border-gray-300 rounded-lg col-span-1">
@@ -45,30 +54,95 @@
      </div>
 </template>
 <script setup>
-const runtimeConfig = useRuntimeConfig();
-import { ref } from 'vue';
+const config = useRuntimeConfig()
+import { onMounted, ref } from 'vue';
 
 const { loggedIn, user, session, fetch, clear, openInPopup } = useUserSession()
 
-const config = useRuntimeConfig()
+const characterInputValue = ref('')
+const realmInputValue = ref('')
 
-console.log('Runtime Config:', config, config.public.BNET_ID, config.public.BNET_CLIENT_SECRET);
+// const fetchUserData = async
+
+// console.log('Runtime Config:', config, config.public.BNET_ID, config.public.BNET_CLIENT_SECRET);
 
 const BNET_ID = ref(config.public.BNET_ID);
-console.log('BNET_ID:', BNET_ID.value);
+// console.log('BNET_ID:', BNET_ID.value);
 
 watch(user, (newUser) => {
   console.log('User changed:', newUser);
+
+  if (newUser) {
+    // Fetch user data from the API
+    /*  $fetch('https://us.api.blizzard.com/profile/user/wow?namespace=profile-us&locale=en_US', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${event.data.code}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        */
+    // fetchUserData(newUser.id);
+  }
+
 });
 watch(loggedIn, () => {
-   console.log('Logged In:', loggedIn);
-  if (!loggedIn.value) {
-    navigateTo('/')
-  }
+   console.log('Logged In:', loggedIn.value);
+  //if (!loggedIn.value) {
+    //navigateTo('/')
+  //}
 })
 
-// const BNET_CLIENT_SECRET = ref(config
-// .public.BNET_CLIENT_SECRET);
+onMounted(() => {
+  // console.log('Component mounted. Logged In:', loggedIn.value, 'User:', user.value);
+  //console.log('Session:', session.value);
+  console.log('User:', user.value, 'session', session.value);
+ window.addEventListener('message', function(event) {
+        // Handle the received message here
+        console.log('Message received from popup:', event.data);
+        if (event.data.success) {
+            console.log('Login successful!');
+            console.log('Cookie:', event.data.code);
+
+         }
+
+
+       
+       
+
+        localStorage.setItem('bnet_code', event.data.code);
+
+        console.log('get author token');
+
+         //$fetch('/api/auth', {
+          //method: 'POST',
+          
+        //})
+        /*
+         fetch('https://oauth.battle.net/token', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/x-www-form-urlencoded'
+           },
+           body: new URLSearchParams({
+             grant_type: 'authorization_code',
+             code: localStorage.getItem('bnet_code'),
+             redirect_uri: 'http://localhost:3000/success',
+             client_id:  config.public.BNET_ID,
+             client_secret: config.public.BNET_CLIENT_SECRET
+           })
+         })
+         .then(response => response.json())
+         .then(data => {
+           console.log('Token response:', data);
+         })
+         .catch(error => {
+           console.error('Error fetching token:', error);
+         });  /**/
+         });
+ });
+   // const BNET_CLIENT_SECRET = ref(config
+   // .public.BNET_CLIENT_SECRET);
 
 // console.log('BNET_ID:', BNET_ID.value, 'BNET_CLIENT_SECRET:', BNET_CLIENT_SECRET.value);
 

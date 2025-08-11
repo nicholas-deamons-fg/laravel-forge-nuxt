@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "PORT=8000 nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -20,7 +20,7 @@
     "better-sqlite3": "^12.2.0",
     "buffer": "^6.0.3",
     "eslint": "^9.32.0",
-    "nuxt": "^4.0.2",
+    "nuxt": "^4.0.3",
     "nuxt-auth-utils": "^0.5.22",
     "passport": "^0.7.0",
     "passport-bnet": "^2.0.0",

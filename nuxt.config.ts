@@ -6,6 +6,9 @@ export default defineNuxtConfig({
    devtools: { enabled: true },
  
   css: ['~/assets/css/main.css'],
+  features: {
+    inlineStyles: false
+  },
   components: [
     {
       path: '~/components',
