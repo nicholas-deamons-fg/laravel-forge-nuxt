@@ -17,11 +17,11 @@ import { onMounted } from "vue";
 onMounted(() => {
   // console.log('Component mounted. Logged In:', loggedIn.value, 'User:', user.value);
   // lert(getCookie('nuxt-session'));
-  const params = new URLSearchParams(window.location.search);
-  window.opener.postMessage({
-    success: true,
-    code: params.get('code'),
-  });
+  //const params = new URLSearchParams(window.location.search);
+  //window.opener.postMessage({
+    //success: true,
+    //code: params.get('code'),
+  //});
 })
 
 /*

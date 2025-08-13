@@ -1,7 +1,7 @@
 <template>
      <div class="p-20 max-w-xxl mx-auto">
-      <button class="btn btn-primary cursor-pointer" 
-         @click="openInPopup('/auth/battlenet')">Login with BNet</button>
+      <UButton class="btn btn-primary cursor-pointer" 
+         to="/auth/battlenet" external >Login with BNet</UButton>
         <div class="grid grid-cols-6 lg:gap-20">
             <div class="col-span-1">
                test for login state {{ loggedIn ? 'Logged In' : 'Not Logged In' }}

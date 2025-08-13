@@ -4,7 +4,7 @@ export default defineOAuthBattledotnetEventHandler({
     // 1. Exchange code for access token with Battle.net API
     // 2. Fetch user profile with access token
     // 3. Set user session with relevant data
-    console.log('Battle.net OAuth success:', response)
+    // console.log('Battle.net OAuth success:', response)
     await setUserSession(event, { user: { 
       tokens: {
         token: response.tokens.access_token
@@ -15,7 +15,7 @@ export default defineOAuthBattledotnetEventHandler({
       }
 
      }, loggedInAt: new Date() })
-    return sendRedirect(event, '/success') // Redirect to a success page
+    return sendRedirect(event, '/') // Redirect to a success page
   },
   onError: (event, error) => {
     console.error('Battle.net OAuth error:', error)
