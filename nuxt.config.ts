@@ -38,7 +38,8 @@ export default defineNuxtConfig({
       // provider in lowercase (github, google, etc.)
       "battle.net": {
         clientId: process.env.BNET_ID,
-        clientSecret: process.env.BNET_CLIENT_SECRET
+        clientSecret: process.env.BNET_CLIENT_SECRET,
+        redirectUri: 'http://localhost:3000/'
       }
     },
       public: {

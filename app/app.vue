@@ -14,12 +14,7 @@
  
 </template>
 <script setup>
-const { loggedIn } = useUserSession()
-watch(loggedIn, () => {
-  if (!loggedIn.value) {
-    navigateTo('/')
-  }
-})
+ 
 // const runtimeConfig = useRuntimeConfig();
 
 //var BNET_ID = runtimeConfig.public.BNET_ID

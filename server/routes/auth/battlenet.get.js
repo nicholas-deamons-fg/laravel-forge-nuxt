@@ -4,7 +4,7 @@ export default defineOAuthBattledotnetEventHandler({
     // 1. Exchange code for access token with Battle.net API
     // 2. Fetch user profile with access token
     // 3. Set user session with relevant data
-    // console.log('Battle.net OAuth success:', response)
+    console.log('Battle.net OAuth success:', response)
     await setUserSession(event, { user: { 
       tokens: {
         token: response.tokens.access_token
