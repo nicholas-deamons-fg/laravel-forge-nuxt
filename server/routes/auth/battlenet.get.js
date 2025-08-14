@@ -15,7 +15,7 @@ export default defineOAuthBattledotnetEventHandler({
       }
 
      }, loggedInAt: new Date() })
-    return sendRedirect(event, '/') // Redirect to a success page
+    return sendRedirect(event, '/success') // Redirect to a success page
   },
   onError: (event, error) => {
     console.error('Battle.net OAuth error:', error)

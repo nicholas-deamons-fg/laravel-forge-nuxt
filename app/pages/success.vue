@@ -7,7 +7,10 @@
 
 <script setup>
 import { onMounted } from "vue";
+//const config = useRuntimeConfig()
+//import { onMounted, ref } from 'vue';
 
+const { loggedIn, user, session, fetch, clear, openInPopup } = useUserSession()
 //const { loggedIn, user, session, fetch, clear, openInPopup } = useUserSession();
 
 
@@ -15,7 +18,7 @@ import { onMounted } from "vue";
 //console.log('User:', user);
 // console.error('Session:', session);
 onMounted(() => {
-  // console.log('Component mounted. Logged In:', loggedIn.value, 'User:', user.value);
+  console.log('Component mounted. Logged In:', loggedIn.value, 'User:', user.value);
   // lert(getCookie('nuxt-session'));
   //const params = new URLSearchParams(window.location.search);
   //window.opener.postMessage({

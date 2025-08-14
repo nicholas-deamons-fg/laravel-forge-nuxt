@@ -6,7 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "nuxt preview --hostname localhost --port 3000",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "vite-plugin-mkcert": "^1.17.8",
     "vite-plugin-node-polyfills": "^0.24.0"
   }
 }

@@ -1,12 +1,15 @@
 <template>
      <div class="p-20 max-w-xxl mx-auto">
+      
       <UButton class="btn btn-primary cursor-pointer" 
          to="/auth/battlenet" external >Login with BNet</UButton>
         <div class="grid grid-cols-6 lg:gap-20">
+          <AuthState>
             <div class="col-span-1">
-               test for login state {{ loggedIn ? 'Logged In' : 'Not Logged In' }}
+               test for login state <br />{{ loggedIn ? 'Logged In' : 'Not Logged In' }}
 
             </div>
+          </AuthState>
             <div class="lg:col-span-5 lg:border-l lg:border-gray-200 lg:pl-10 ">
                <p class="text-md font-semibold">
                 {{loggedIn ? `Yo, ${user.user.battletag}!` : 'Welcome to the ND Character Tracker'}}</p>
